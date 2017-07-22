@@ -1,0 +1,16 @@
+language: php
+php:
+- '5.6'
+script:
+- composer install
+- zip -r prosumer-calculator.zip . -x *.git* -x .travis.yml
+
+deploy:
+  provider: releases
+  api_key:
+    secure: iR43ByjsG4I6COjkF15W2h4BBkdVmEdLkpObUs5DkyqcINC1EP4auA6nR+hgFrzugKDrWCUvLykiDtMKbdC+ugsrbXqI7RJ+kDvBSbQLE3uWr621o68kf2w3fCFqDfwx8ytu5+lvhRilA0QJfMvQpX3KFe3nqQE7pwIKEMJIzWXA9rUolWN2HiCbo0tqfgtD6fXwfc3TUoz/yQNO6Co7nmULkdbFEsH5tKefKI3O0x7vItMHhSSSOry8QHqXW2zmhZkau7RIoN0QEQc2TAPo42jmhSZz3VfqnHuEcl79tETeuc6y1+phbVHXj1UQLZxvHGyaOs5sxzrEsJTwVgojeHmTKhgu6ftJAmqPf3s9RAIYlvPzGhuyrQLe79QL4zPujUobvLVBOx898g82pDnfedKGdX0OBXUExlOKD1Ltmj439Os1BldtbDZdxf3hI6FUHxbev+FcIVnj3KcTY9+Vijh6Y27zRnmp1yeoFLeGCLaCO/2vgNI+2ndGO1cNW4q9p4AitpaPXBWq51eq0ifO9ENSw1ZlVVMtxI2QCSVVeqJYxbq9764KT5QWxt1l8cTREnQVhNNfjlUphhDNWDYThJXF9saQKCDIBcyXWfzCT8LePDnvejVdtStAKJe0SWAyKRsi7s1Si9Gczc9TTOXmmulXUGHJVtfRJYI9AfMCwMM=
+  file: prosumer-calculator.zip
+  skip_cleanup: true
+  on:
+    tags: true
+

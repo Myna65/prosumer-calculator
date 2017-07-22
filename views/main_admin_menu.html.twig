@@ -1,0 +1,15 @@
+<div class="wrap">
+    <h1>Hi!</h1>
+    <table class="wp-list-table widefat fixed striped">
+        <tr>
+            <th id="zipCode">zipCode</th>
+            <th id="name">name</th>
+        </tr>
+        {% for city in cities %}
+            <tr>
+                <td>{{ city.zipCode }}</td>
+                <td>{{ city.name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
