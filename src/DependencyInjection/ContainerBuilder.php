@@ -4,8 +4,13 @@
 namespace Myna65\ProsumerCalculator\DependencyInjection;
 
 
+use Doctrine\Common\EventManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Events;
 use Doctrine\ORM\Tools\Setup;
+use Myna65\ProsumerCalculator\Service\FilesService;
+use Myna65\ProsumerCalculator\Service\DatabaseService;
+use Myna65\ProsumerCalculator\Service\TablePrefix;
 use Myna65\ProsumerCalculator\Service\TwigFactory;
 use Pimple\Container;
 
@@ -14,12 +19,16 @@ class ContainerBuilder
     public static function build() {
         $container = new Container();
 
+        $container['cache'] = function () {
+            return new FilesService();
+        };
+
         $container['twig'] = function () {
-            return TwigFactory::buildTwig();
+            return TwigFactory::build();
         };
 
         $container['dbconfig'] = function () {
-            $paths = array( __DIR__.'/../Entity/City.php' );
+            $paths = array( __DIR__.'/../Entity/' );
             $isDevMode = WP_DEBUG;
             return Setup::createAnnotationMetadataConfiguration( $paths, $isDevMode );
         };
@@ -35,7 +44,16 @@ class ContainerBuilder
 
             );
             $config = $container['dbconfig'];
-            return EntityManager::create( $dbParams, $config );
+
+
+            $evm = new EventManager();
+            $evm->addEventListener(Events::loadClassMetadata, new TablePrefix());
+
+            return EntityManager::create( $dbParams, $config, $evm );
+        };
+
+        $container['databaseService'] = function ($container) {
+            return new DatabaseService($container['entityManager']);
         };
 
         ContainerAware::setContainer($container);

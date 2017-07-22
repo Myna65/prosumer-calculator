@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Myna65\ProsumerCalculator\Entity;
 
 use Doctrine\ORM\Mapping\Entity;
@@ -9,12 +10,12 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
 
 /**
- * City
+ * DNO
  *
- * @Table(name="prosumer_city")
+ * @Table(name="prosumer_dno")
  * @Entity()
  */
-class City {
+class DNO {
 
     /**
      * @var int
@@ -23,18 +24,18 @@ class City {
      * @GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     * @Column(name="zip_code", type="string", length=8)
-     */
-    private $zipCode;
-
     /**
      * @var string
      * @Column(name="name", type="string")
      */
     private $name;
+
+    /**
+     * @var string
+     * @Column(name="price", type="decimal", precision=6, scale=2)
+     */
+    private $price;
+
 
     /**
      * @return int
@@ -47,24 +48,6 @@ class City {
     /**
      * @return string
      */
-    public function getZipCode()
-    {
-        return $this->zipCode;
-    }
-
-    /**
-     * @param string $zipCode
-     * @return City
-     */
-    public function setZipCode($zipCode)
-    {
-        $this->zipCode = $zipCode;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
     public function getName()
     {
         return $this->name;
@@ -72,13 +55,32 @@ class City {
 
     /**
      * @param string $name
-     * @return City
+     * @return DNO
      */
     public function setName($name)
     {
         $this->name = $name;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param string $price
+     * @return DNO
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+        return $this;
+    }
+
 
 
 

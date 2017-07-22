@@ -22,4 +22,8 @@ class ContainerAware {
         return self::$container[$service];
     }
 
+    public static function getStatic($service) {
+        return self::$container[$service];
+    }
+
 }

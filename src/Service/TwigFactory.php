@@ -8,9 +8,9 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class TwigFactory {
 
-    public static function buildTwig() {
+    public static function build() {
 
-        $twigCachePath = WP_CONTENT_DIR . '/prosumer_calculator/cache/twig';
+        $twigCachePath = FilesService::getBaseFile().'/cache/twig';
         $fs = new Filesystem();
 
         if(!$fs->exists($twigCachePath)) {
