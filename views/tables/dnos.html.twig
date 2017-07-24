@@ -1,0 +1,16 @@
+{% if dnos|length == 0 %}
+    <i>No data</i>
+{% else %}
+    <table class="wp-list-table widefat fixed striped">
+        <tr>
+            <th id="zipCode">Name</th>
+            <th id="name">Price</th>
+        </tr>
+        {% for dno in dnos %}
+            <tr>
+                <td>{{ dno.name }}</td>
+                <td>{{ dno.price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

@@ -8,10 +8,12 @@ use Doctrine\Common\EventManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Tools\Setup;
+use Myna65\ProsumerCalculator\Service\DnoSerializerBuilder;
 use Myna65\ProsumerCalculator\Service\FilesService;
 use Myna65\ProsumerCalculator\Service\DatabaseService;
+use Myna65\ProsumerCalculator\Service\FormFactoryBuilder;
 use Myna65\ProsumerCalculator\Service\TablePrefix;
-use Myna65\ProsumerCalculator\Service\TwigFactory;
+use Myna65\ProsumerCalculator\Service\TwigBuilder;
 use Pimple\Container;
 
 class ContainerBuilder
@@ -24,7 +26,11 @@ class ContainerBuilder
         };
 
         $container['twig'] = function () {
-            return TwigFactory::build();
+            return TwigBuilder::build();
+        };
+
+        $container['formFactory'] = function ($container) {
+            return FormFactoryBuilder::build($container['twig']);
         };
 
         $container['dbconfig'] = function () {
@@ -54,6 +60,10 @@ class ContainerBuilder
 
         $container['databaseService'] = function ($container) {
             return new DatabaseService($container['entityManager']);
+        };
+
+        $container['dnoSerializer'] = function () {
+            return DnoSerializerBuilder::build();
         };
 
         ContainerAware::setContainer($container);

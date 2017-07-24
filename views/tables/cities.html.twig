@@ -1,9 +1,10 @@
-<div class="wrap">
-    <h1>Hi!</h1>
+{% if cities|length == 0 %}
+    <i>No data</i>
+{% else %}
     <table class="wp-list-table widefat fixed striped">
         <tr>
-            <th id="zipCode">zipCode</th>
-            <th id="name">name</th>
+            <th id="zipCode">Zip</th>
+            <th id="name">Name</th>
         </tr>
         {% for city in cities %}
             <tr>
@@ -12,4 +13,4 @@
             </tr>
         {% endfor %}
     </table>
-</div>
+{% endif %}

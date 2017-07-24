@@ -4,9 +4,10 @@
 namespace Myna65\ProsumerCalculator\Service;
 
 
+use Myna65\ProsumerCalculator\Twig\FakeTranslation;
 use Symfony\Component\Filesystem\Filesystem;
 
-class TwigFactory {
+class TwigBuilder {
 
     public static function build() {
 
@@ -19,12 +20,19 @@ class TwigFactory {
 
         }
 
-        $twigLoader = new \Twig_Loader_Filesystem(__DIR__.'/../../views');
+        $twigLoader = new \Twig_Loader_Filesystem([
+            __DIR__ . '/../../views',
+            __DIR__ . '/../../vendor/symfony/twig-bridge/Resources/views/Form'
+        ]);
 
-        return new \Twig_Environment($twigLoader,[
+        $twig = new \Twig_Environment($twigLoader,[
             'cache' => $twigCachePath,
             'debug' => WP_DEBUG
         ]);
+
+        $twig->addExtension(new FakeTranslation());
+
+        return $twig;
 
     }
 

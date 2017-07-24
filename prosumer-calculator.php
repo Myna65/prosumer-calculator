@@ -6,7 +6,7 @@ Description: Prosumer tax calculator in Belgium
 Version:     0.1
 Author:      Nathan Meynaert
 Author URI:  https://github.com/Myna65
-License:     AGPL-3.0
+License:     AGPL-3.0+
 License URI: https://www.gnu.org/licenses/agpl-3.0.html
 Text Domain: prosumer_calculator
 Domain Path: /languages

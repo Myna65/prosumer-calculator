@@ -1,0 +1,17 @@
+<div class="wrap">
+
+    {% if import_allowed %}
+        <div class="card">
+            <h1>Import</h1>
+            {% include 'forms/import.html.twig' %}
+        </div>
+
+    {% endif %}
+
+    <h1>DNOs</h1>
+    {% include 'tables/dnos.html.twig' %}
+
+    <h1>Cities</h1>
+    {% include 'tables/cities.html.twig' %}
+
+</div>

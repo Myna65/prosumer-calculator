@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * City
@@ -35,6 +37,13 @@ class City {
      * @Column(name="name", type="string")
      */
     private $name;
+
+    /**
+     * @var DNO
+     * @ManyToOne(targetEntity="DNO", inversedBy="cities")
+     * @JoinColumn(nullable=false)
+     */
+    private $dno;
 
     /**
      * @return int
@@ -77,6 +86,24 @@ class City {
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return DNO
+     */
+    public function getDno()
+    {
+        return $this->dno;
+    }
+
+    /**
+     * @param DNO $dno
+     * @return City
+     */
+    public function setDno($dno)
+    {
+        $this->dno = $dno;
         return $this;
     }
 

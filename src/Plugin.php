@@ -27,7 +27,7 @@ class Plugin extends ContainerAware
 
         $this->registerLifecycleHooks();
 
-        AdminMenu::registerMenu();
+        Router::registerAdminRoutes();
 
     }
 

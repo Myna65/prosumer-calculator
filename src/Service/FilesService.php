@@ -9,7 +9,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class FilesService {
 
     public static function getBaseFile() {
-        return WP_CONTENT_DIR . '/plugins/prosumer_calculator';
+        return WP_CONTENT_DIR . '/prosumer-calculator';
     }
 
     public function clearCache() {

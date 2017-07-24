@@ -3,11 +3,13 @@
 
 namespace Myna65\ProsumerCalculator\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * DNO
@@ -32,9 +34,19 @@ class DNO {
 
     /**
      * @var string
-     * @Column(name="price", type="decimal", precision=6, scale=2)
+     * @Column(name="price", type="decimal", precision=6, scale=2, nullable=true)
      */
     private $price;
+
+    /**
+     * @var ArrayCollection
+     * @OneToMany(targetEntity="City", mappedBy="dno")
+     */
+    private $cities;
+
+    public function __construct() {
+        $this->cities = new ArrayCollection();
+    }
 
 
     /**
@@ -78,6 +90,34 @@ class DNO {
     public function setPrice($price)
     {
         $this->price = $price;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCities()
+    {
+        return $this->cities;
+    }
+
+    /**
+     * @param ArrayCollection $cities
+     * @return DNO
+     */
+    public function setCities($cities)
+    {
+        $this->cities = $cities;
+        return $this;
+    }
+
+    /**
+     * @param City $city
+     * @return DNO
+     */
+    public function addCity($city)
+    {
+        $this->cities->add($city);
         return $this;
     }
 
